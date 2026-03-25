@@ -4,185 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Invitation | Alex & Diane</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
         /* General Reset */
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: 'Montserrat', sans-serif;
-            overflow: hidden; /* Prevents scrolling until opened */
-            background-color: #0c0d0c; /* Dark background to make envelope pop */
+            overflow: hidden; /* Prevent scrolling until envelope opens */
+            background-color: #000;
         }
 
-        /* --- 1. THE LUXURY ENVELOPE SCREEN (image_8ab6bf.jpg Vibe) --- */
+        /* --- 1. THE EMBOSSED FLORAL ENVELOPE (Matches image_8ab6bf.jpg) --- */
         #envelope-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 9999;
-            perspective: 2000px; /* Enhanced 3D perspective */
-            transition: opacity 1s ease 1.2s;
-            display: flex; justify-content: center; align-items: center;
+            perspective: 1200px;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1) 1s, opacity 1s ease 1s;
         }
 
-        /* The main velvet envelope body (Sage/Deep Green with texture) */
+        /* The main textured body */
         .envelope-body {
-            position: relative;
-            width: 100vw; height: 100vh;
-            background-color: #2e3b2e; /* Deep Sage Green */
-            /* Advanced velvet-green texture overlay */
-            background-image: 
-                linear-gradient(rgba(46, 59, 46, 0.8), rgba(46, 59, 46, 0.9)),
-                url('https://www.transparenttextures.com/patterns/black-linen.png');
-            display: flex; justify-content: center; align-items: center;
-            flex-direction: column;
-            box-shadow: 0 0 100px rgba(0,0,0,0.7);
-            overflow: hidden;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            /* High-quality embossed floral texture with sage green tint */
+            background-image: url('https://images.unsplash.com/photo-1533038590840-1cbea6c6cc19?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            background-color: #9cb08f; background-blend-mode: multiply;
         }
 
-        /* Gold Corner Filigree (image_8ab6bf.jpg accurate) */
-        .corner-ornament {
-            position: absolute; width: 120px; height: 120px;
-            background-size: contain; background-repeat: no-repeat;
-            opacity: 0.8;
-            pointer-events: none;
-        }
-        
-        .top-left     { top: 20px; left: 20px; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23d4af37" d="M0 0c50 0 100 50 100 100H0V0z"/></svg>'); transform: rotate(0deg); }
-        .bottom-right { bottom: 20px; right: 20px; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23d4af37" d="M0 0c50 0 100 50 100 100H0V0z"/></svg>'); transform: rotate(180deg); }
-
-        /* The 3D Folding Top Flap (Sage interior) */
-        .flap-container {
+        /* The top V-flap (matches the texture) */
+        .envelope-flap {
             position: absolute; top: 0; left: 0; width: 100%; height: 50vh;
-            perspective: 1000px; z-index: 10;
-        }
-
-        .flap {
-            width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1533038590840-1cbea6c6cc19?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover; background-position: top center;
+            background-color: #9cb08f; background-blend-mode: multiply;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
             transform-origin: top;
-            transform-style: preserve-3d;
             transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 15px 20px rgba(0,0,0,0.5)); /* Shadow over envelope body */
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
+            z-index: 5;
         }
 
-        /* Front of flap (Sage Velvet) and Back of flap (Sage Interior) */
-        .flap-front, .flap-back {
-            position: absolute; width: 100%; height: 100%;
-            backface-visibility: hidden;
-            clip-path: polygon(0 0, 100% 0, 50% 100%); /* Perfect V triangle */
+        /* The Language Toggle (Top Right) */
+        .lang-toggle {
+            position: absolute; top: 30px; right: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 6px 14px; border-radius: 20px;
+            font-size: 0.8rem; font-weight: 600; color: #555;
+            display: flex; align-items: center; gap: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 10;
         }
-        
-        .flap-front { background-color: #2e3b2e; }
-        .flap-back { background-color: #384638; transform: rotateX(180deg); }
 
-        /* --- Pre-Open English Text (image_8ab6bf.jpg accurate placement) --- */
-        .pre-open-text {
-            position: absolute; top: 15vh; left: 50%;
+        /* The text "You are invited" (Dark script, placed below seal) */
+        .invite-text {
+            position: absolute; top: calc(50vh + 110px); left: 50%;
             transform: translateX(-50%);
-            color: #fff; font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem; letter-spacing: 1px;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
-            z-index: 15; transition: opacity 0.5s ease;
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.8rem; color: #1a2612; /* Dark green/black */
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.4);
             white-space: nowrap;
+            z-index: 10; transition: opacity 0.4s ease;
         }
 
-        /* --- 2. THE BREAKING AND MELTING WAX SEAL (image_8ab6bf.jpg accurate design) --- */
-        .seal-trigger-area {
+        /* --- 2. THE 3-PIECE MELTING WAX SEAL --- */
+        .seal-wrapper {
             position: absolute; top: 50vh; left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 20;
-            width: 180px; height: 180px;
-            cursor: pointer;
-            pointer-events: auto; /* Required for click */
-            display: flex; justify-content: center; align-items: center;
+            width: 150px; height: 150px;
+            z-index: 20; cursor: pointer;
+            filter: drop-shadow(0 12px 15px rgba(0,0,0,0.5));
         }
 
-        /* The container for the fragmented, melting seal */
-        #wax-seal-melting-wrapper {
-            position: relative; width: 180px; height: 180px;
-            transform-style: preserve-3d;
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5)); /* High-end drop shadow */
-        }
-
-        /* General styles for all fragmented melting seal pieces */
-        .seal-fragment {
+        /* The text overlay for the monogram */
+        .seal-monogram {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 40% 40%, #c41e3a, #9c152a, #6b0c1b); /* Viscous Burgundy Wax */
-            border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            flex-direction: column;
-            color: #ffddd2; font-family: 'Great Vibes', cursive; font-size: 2.8rem;
+            font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #ffddd2;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-            box-shadow: inset 0 6px 10px rgba(255,255,255,0.4), inset 0 -8px 15px rgba(0,0,0,0.6);
+            z-index: 25; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* The 3 puzzle pieces that make up the whole seal */
+        .wax-piece {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 35% 35%, #e63946, #ba1826, #780000);
+            border-radius: 50%;
+            box-shadow: inset 0 5px 10px rgba(255,255,255,0.3), inset 0 -6px 12px rgba(0,0,0,0.6);
             border: 2px solid #5c0000;
-            backface-visibility: hidden;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
-            clip-path: circle(50% at 50% 50%); /* Start as a whole circle */
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease 0.2s;
         }
 
-        /* Pre-Open Text Inside Seal */
-        .seal-names   { font-size: 2.8rem; line-height: 1; }
-        .seal-date    { font-family: 'Cinzel', serif; font-size: 1.1rem; letter-spacing: 1px; border-top: 1px solid rgba(255,255,255,0.3); margin-top: 5px; }
+        /* Slicing the circle into 3 distinct parts */
+        .piece-top { clip-path: polygon(0 0, 100% 0, 50% 55%); }
+        .piece-left { clip-path: polygon(0 0, 50% 55%, 50% 100%, 0 100%); }
+        .piece-right { clip-path: polygon(100% 0, 50% 55%, 50% 100%, 100% 100%); }
 
-        /* The Gold Inner Ring (image_8ab6bf.jpg accurate) */
-        .gold-ring-layer {
-            position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 2px solid #b38b6d; border-radius: 50%;
-            pointer-events: none; z-index: 10;
-        }
-
-        /* Clip the three distinct breaking pieces *initially combined* */
-        .seal-top         { clip-path: polygon(0 0, 100% 0, 50% 50%); }
-        .seal-left-bottom  { clip-path: polygon(0 0, 50% 50%, 0 100%); }
-        .seal-right-bottom { clip-path: polygon(100% 0, 100% 100%, 50% 50%); }
-
-        /* --- BREAK AND MELT ANIMATION SEQUENCE --- */
-        .broken .seal-trigger-area { pointer-events: none; } /* Disable click after action */
-        .broken .gold-ring-layer   { opacity: 0; }
-        .broken .pre-open-text      { opacity: 0; }
-
-        /* Viscous Melting into 3 distinct pieces */
+        /* MELTING ANIMATION: Triggered via Javascript */
+        .seal-wrapper.broken { pointer-events: none; }
+        .seal-wrapper.broken .seal-monogram { opacity: 0; }
         
-        /* Piece 1: Top (Melt and break up) */
-        .broken .seal-top {
-            transform: scaleY(1.3) translateY(-40px) translateX(-5px) rotate(-10deg);
-            opacity: 0;
-            border-radius: 40% 40% 60% 60%; /* Globuar melting */
-        }
-
-        /* Piece 2: Left-Bottom (Melt and break down-left) */
-        .broken .seal-left-bottom {
-            transform: scaleY(1.3) translateY(30px) translateX(-45px) rotate(-15deg);
-            opacity: 0;
-            border-radius: 60% 40% 60% 40%;
-        }
-
-        /* Piece 3: Right-Bottom (Melt and break down-right) */
-        .broken .seal-right-bottom {
-            transform: scaleY(1.3) translateY(30px) translateX(45px) rotate(15deg);
-            opacity: 0;
-            border-radius: 40% 60% 40% 60%;
-        }
+        /* The pieces stretch down (scaleY) and fall away to simulate heavy melting wax */
+        .seal-wrapper.broken .piece-top { transform: translateY(-30px) scaleY(1.3); opacity: 0; }
+        .seal-wrapper.broken .piece-left { transform: translate(-40px, 40px) scaleY(1.6) rotate(-15deg); opacity: 0; }
+        .seal-wrapper.broken .piece-right { transform: translate(40px, 40px) scaleY(1.6) rotate(15deg); opacity: 0; }
 
 
-        /* --- 3. MAIN INVITATION CONTENT (WITH VIDEO BACKGROUND) --- */
+        /* --- 3. MAIN CONTENT WITH VIDEO BACKGROUND --- */
         #main-content {
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100vh;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
             overflow-y: scroll; opacity: 0;
-            transition: opacity 1.5s ease 1.2s; /* Fades in after envelope drops */
+            transition: opacity 1.5s ease 1.2s;
             background-color: #fcfaf8;
         }
 
         .content-visible { opacity: 1 !important; }
 
-        /* The Cinematic Video Hero Section */
         .hero-section {
             height: 100vh; width: 100%; position: relative;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; color: #fff; overflow: hidden;
         }
 
-        /* Video Layer showing palms and flying birds */
+        /* Video Layer: Muted and Playsinline are required for mobile autoplay */
         .bg-video {
             position: absolute; top: 50%; left: 50%;
             min-width: 100%; min-height: 100%;
@@ -192,7 +137,7 @@
 
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
             z-index: -1;
         }
 
@@ -201,26 +146,20 @@
         .names { font-family: 'Great Vibes', cursive; font-size: 6.5rem; margin: 0; font-weight: 400; text-shadow: 2px 2px 15px rgba(0,0,0,0.5); }
         .date-hero { font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 3px; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.6); }
 
-        /* Paper Details Section */
-        .details-section { padding: 80px 20px; background-color: #fcfaf8; text-align: center; color: #5a4b41; }
-        .proposal-area { max-width: 600px; margin: 0 auto 50px auto; }
+        .details-section { padding: 80px 20px; text-align: center; color: #5a4b41; }
         .proposal-year { font-family: 'Cinzel', serif; font-size: 1.5rem; color: #a43a3a; margin-bottom: 5px; }
         .proposal-title { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #8c7a6b; margin-bottom: 20px; font-weight: 400; }
-        .proposal-text { font-family: 'Great Vibes', cursive; font-size: 2rem; line-height: 1.4; color: #5a4b41; margin-bottom: 30px; opacity: 0.9; }
-        
-        .vintage-dove-illustration { width: 300px; max-width: 85%; margin: 0 auto 50px auto; display: block; opacity: 0.95; }
-
+        .proposal-text { font-family: 'Great Vibes', cursive; font-size: 2rem; line-height: 1.4; max-width: 600px; margin: 0 auto 40px auto; opacity: 0.9; }
+        .vintage-dove-illustration { width: 300px; max-width: 85%; margin: 0 auto 50px auto; display: block; }
         .order-title { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #8c7a6b; margin-bottom: 40px; font-weight: 400; }
         .schedule-item { margin-bottom: 35px; }
         .time { font-family: 'Cinzel', serif; font-weight: 600; font-size: 1.3rem; color: #a43a3a; margin-bottom: 5px; letter-spacing: 1px; }
         .event { font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 5px; color: #333; }
-        .location { font-size: 0.95rem; font-style: italic; color: #777; }
 
-        /* General Opening Animation Classes (Slide envelope screen up) */
-        .open-flap { transform: rotateX(180deg); }
-        .envelope-slide-up { transform: translateY(-100vh); opacity: 0; pointer-events: none; }
+        /* Animation classes triggered by JS */
+        .envelope-flap.open-flap { transform: rotateX(180deg); }
+        #envelope-screen.slide-away { transform: translateY(-100vh); opacity: 0; pointer-events: none; }
 
-        /* Scroll indicator */
         .scroll-indicator {
             position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 2;
             color: #fff; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
@@ -228,49 +167,33 @@
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-            40% { transform: translateY(-10px) translateX(-50%); }
-            60% { transform: translateY(-5px) translateX(-50%); }
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
     </style>
 </head>
 <body>
 
     <div id="envelope-screen">
-        <div class="envelope-body">
+        <div class="envelope-body"></div>
+        
+        <div class="lang-toggle">🌐 EN</div>
+        
+        <div class="envelope-flap" id="envelope-flap"></div>
+
+        <div class="invite-text" id="invite-text">You are invited</div>
+
+        <div class="seal-wrapper" id="wax-seal" onclick="openEnvelope()">
+            <div class="wax-piece piece-top"></div>
+            <div class="wax-piece piece-left"></div>
+            <div class="wax-piece piece-right"></div>
             
-            <div class="corner-ornament top-left"></div>
-            <div class="corner-ornament bottom-right"></div>
-            
-            <div class="pre-open-text" id="pre-open-text">We Are Getting Married</div>
-
-            <div class="flap-container">
-                <div class="flap" id="envelope-flap">
-                    <div class="flap-front"></div>
-                    <div class="flap-back"></div>
-                </div>
-            </div>
-
-            <div class="seal-trigger-area" onclick="openEnvelope()">
-                <div id="wax-seal-melting-wrapper">
-                    <div class="gold-ring-layer"></div>
-                    
-                    <div class="seal-content-layer">
-                        <div class="seal-fragment seal-left-bottom">
-                            <div class="seal-names">A & D</div>
-                            <div class="seal-date">22 NOVEMBER 2026</div>
-                        </div>
-                        <div class="seal-fragment seal-top"></div>
-                        <div class="seal-fragment seal-right-bottom"></div>
-                    </div>
-                </div>
-            </div>
-
+            <div class="seal-monogram">A&D</div>
         </div>
     </div>
 
     <div id="main-content">
-        
         <section class="hero-section">
             <video class="bg-video" autoplay loop muted playsinline>
                 <source src="https://cdn.pixabay.com/video/2021/08/11/84687-586948523_large.mp4" type="video/mp4">
@@ -286,11 +209,9 @@
         </section>
 
         <section class="details-section">
-            <div class="proposal-area">
-                <div class="proposal-year">2025</div>
-                <h2 class="proposal-title">The Proposal</h2>
-                <p class="proposal-text">With hearts full of love and dreams for tomorrow, we asked a question and received the answer we longed for, amidst tears of joy.</p>
-            </div>
+            <div class="proposal-year">2025</div>
+            <h2 class="proposal-title">The Proposal</h2>
+            <p class="proposal-text">With hearts full of love and dreams for tomorrow, we asked a question and received the answer we longed for, amidst tears of joy.</p>
             
             <img class="vintage-dove-illustration" src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=800&auto=format&fit=crop" alt="Vintage Dove Illustration">
 
@@ -299,40 +220,35 @@
             <div class="schedule-item">
                 <div class="time">3:00 PM</div>
                 <div class="event">Welcome Drinks</div>
-                <div class="location">The Palace Gardens</div>
             </div>
-
             <div class="schedule-item">
                 <div class="time">4:00 PM</div>
                 <div class="event">The Ceremony</div>
-                <div class="location">Under the Palms</div>
             </div>
-
             <div class="schedule-item">
                 <div class="time">6:30 PM</div>
                 <div class="event">Dinner & Dancing</div>
-                <div class="location">The Grand Riad Hall</div>
             </div>
         </section>
-
     </div>
 
     <script>
         function openEnvelope() {
-            // Trigger the "broken" melting sequence
-            document.getElementById('envelope-screen').classList.add('broken');
+            // 1. Break and melt the seal, hide the cursive text
+            document.getElementById('wax-seal').classList.add('broken');
+            document.getElementById('invite-text').style.opacity = '0';
             
-            // Step 1: Open the flap (viscous open waits for melt)
+            // 2. Flip open the envelope flap
             setTimeout(() => {
                 document.getElementById('envelope-flap').classList.add('open-flap');
-            }, 300);
+            }, 500); // Waits for the wax to start melting
 
-            // Step 2: Slide the whole envelope up and reveal the paradise video background
+            // 3. Slide the whole envelope away to reveal the video
             setTimeout(() => {
-                document.getElementById('envelope-screen').classList.add('envelope-slide-up');
-                document.body.style.overflow = 'auto'; // allow scroll
+                document.getElementById('envelope-screen').classList.add('slide-away');
+                document.body.style.overflow = 'auto'; // Enable scrolling
                 document.getElementById('main-content').classList.add('content-visible');
-            }, 1000); // Wait for viscous open to complete
+            }, 1300); // Waits for flap to finish opening
         }
     </script>
 
