@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation | Alex & Diane</title>
+    <title>Wedding Invitation | Shikha & Jay</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
@@ -15,7 +15,7 @@
             background-color: #000;
         }
 
-        /* --- 1. THE EMBOSSED FLORAL ENVELOPE (Matches image_8ab6bf.jpg) --- */
+        /* --- 1. THE EMBOSSED FLORAL ENVELOPE --- */
         #envelope-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 9999;
@@ -146,15 +146,20 @@
         .names { font-family: 'Great Vibes', cursive; font-size: 6.5rem; margin: 0; font-weight: 400; text-shadow: 2px 2px 15px rgba(0,0,0,0.5); }
         .date-hero { font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 3px; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.6); }
 
+        /* --- 4. INDIAN WEDDING FESTIVITIES SECTION --- */
         .details-section { padding: 80px 20px; text-align: center; color: #5a4b41; }
-        .proposal-year { font-family: 'Cinzel', serif; font-size: 1.5rem; color: #a43a3a; margin-bottom: 5px; }
-        .proposal-title { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #8c7a6b; margin-bottom: 20px; font-weight: 400; }
-        .proposal-text { font-family: 'Great Vibes', cursive; font-size: 2rem; line-height: 1.4; max-width: 600px; margin: 0 auto 40px auto; opacity: 0.9; }
-        .vintage-dove-illustration { width: 300px; max-width: 85%; margin: 0 auto 50px auto; display: block; }
+        .proposal-title { font-family: 'Great Vibes', cursive; font-size: 3.8rem; color: #8c7a6b; margin-bottom: 20px; font-weight: 400; }
+        .proposal-text { font-family: 'Great Vibes', cursive; font-size: 2.2rem; line-height: 1.4; max-width: 600px; margin: 0 auto 40px auto; opacity: 0.9; }
+        
+        /* Updated beautiful floral placeholder for Indian wedding aesthetic */
+        .vintage-dove-illustration { width: 350px; max-width: 85%; margin: 0 auto 60px auto; display: block; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        
         .order-title { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #8c7a6b; margin-bottom: 40px; font-weight: 400; }
-        .schedule-item { margin-bottom: 35px; }
-        .time { font-family: 'Cinzel', serif; font-weight: 600; font-size: 1.3rem; color: #a43a3a; margin-bottom: 5px; letter-spacing: 1px; }
-        .event { font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 5px; color: #333; }
+        
+        .schedule-item { margin-bottom: 45px; }
+        .event-date { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #a43a3a; margin-bottom: 5px; font-weight: 600; letter-spacing: 2px; }
+        .time { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 1rem; color: #777; margin-bottom: 5px; }
+        .event { font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 5px; color: #333; }
 
         /* Animation classes triggered by JS */
         .envelope-flap.open-flap { transform: rotateX(180deg); }
@@ -189,7 +194,7 @@
             <div class="wax-piece piece-left"></div>
             <div class="wax-piece piece-right"></div>
             
-            <div class="seal-monogram">A&D</div>
+            <div class="seal-monogram">S&J</div>
         </div>
     </div>
 
@@ -202,32 +207,36 @@
 
             <div class="hero-content">
                 <div class="pre-title">We Are Getting Married</div>
-                <h1 class="names">Alex & Diane</h1>
-                <div class="date-hero">November 22, 2026</div>
+                <h1 class="names">Shikha & Jay</h1>
+                <div class="date-hero">29 JUNE</div>
             </div>
-            <div class="scroll-indicator">Order of Events ↓</div>
+            <div class="scroll-indicator">The Festivities ↓</div>
         </section>
 
         <section class="details-section">
-            <div class="proposal-year">2025</div>
-            <h2 class="proposal-title">The Proposal</h2>
-            <p class="proposal-text">With hearts full of love and dreams for tomorrow, we asked a question and received the answer we longed for, amidst tears of joy.</p>
+            <h2 class="proposal-title">The Festivities</h2>
+            <p class="proposal-text">We joyfully invite you to share in our happiness as we unite in love, surrounded by our family and friends.</p>
             
-            <img class="vintage-dove-illustration" src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=800&auto=format&fit=crop" alt="Vintage Dove Illustration">
+            <img class="vintage-dove-illustration" src="https://images.unsplash.com/photo-1582736142105-8e7c1f8e137b?q=80&w=800&auto=format&fit=crop" alt="Floral Decor">
 
-            <h2 class="order-title">Order of Events</h2>
+            <h2 class="order-title">Schedule of Events</h2>
             
             <div class="schedule-item">
-                <div class="time">3:00 PM</div>
-                <div class="event">Welcome Drinks</div>
+                <div class="event-date">28 JUNE</div>
+                <div class="event">Haldi Ceremony</div>
+                <div class="time">10:00 AM</div>
             </div>
+            
             <div class="schedule-item">
+                <div class="event-date">29 JUNE</div>
+                <div class="event">Wedding Ceremony</div>
                 <div class="time">4:00 PM</div>
-                <div class="event">The Ceremony</div>
             </div>
+            
             <div class="schedule-item">
-                <div class="time">6:30 PM</div>
-                <div class="event">Dinner & Dancing</div>
+                <div class="event-date">29 JUNE</div>
+                <div class="event">Reception Dinner</div>
+                <div class="time">7:30 PM</div>
             </div>
         </section>
     </div>
