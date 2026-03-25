@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation | Emma & James</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* General Setup */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden; /* Prevent scrolling until opened */
+            background-color: #fbf9f6;
+        }
+
+        /* --- OVERLAY: The Envelope Screen --- */
+        #envelope-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Green floral placeholder background */
+            background-image: url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.5s ease;
+        }
+
+        /* Dark overlay to make the envelope texture look richer */
+        #envelope-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(135, 148, 126, 0.85); /* Sage green tint */
+            z-index: -1;
+        }
+
+        .seal-container {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .seal-container:hover {
+            transform: scale(1.05);
+        }
+
+        .wax-seal {
+            width: 120px;
+            height: 120px;
+            background-color: #9b2226; /* Deep red wax color */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-style: italic;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3), inset 0 -3px 8px rgba(0,0,0,0.2);
+            margin: 0 auto 20px auto;
+            border: 2px solid #7a181c;
+        }
+
+        .invite-text {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-style: italic;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Animation class to hide the envelope */
+        .open-envelope {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+
+        /* --- MAIN CONTENT: The Invitation --- */
+        #main-content {
+            height: 100vh;
+            overflow-y: scroll;
+            opacity: 0;
+            transition: opacity 1s ease 0.5s; /* Fades in after envelope opens */
+        }
+
+        .content-visible {
+            opacity: 1 !important;
+        }
+
+        /* Section 1: Paradise Background Hero */
+        .hero-section {
+            height: 100vh;
+            width: 100%;
+            /* Paradise garden placeholder background */
+            background-image: url('https://images.unsplash.com/photo-1588392382834-a891154bca4d?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        /* Subtle gradient to make text readable */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
+            z-index: 1;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .pre-title {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .names {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin: 10px 0;
+            font-style: italic;
+        }
+
+        .date {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            border-top: 1px solid #fff;
+            padding-top: 10px;
+            display: inline-block;
+        }
+
+        /* Section 2: Details & Program */
+        .details-section {
+            padding: 80px 20px;
+            background-color: #fbf9f6; /* Soft cream background */
+            text-align: center;
+            color: #4a4a4a;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-style: italic;
+            color: #87947e; /* Sage green to match envelope */
+            margin-bottom: 40px;
+        }
+
+        .schedule-item {
+            margin-bottom: 30px;
+        }
+
+        .time {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #9b2226;
+            margin-bottom: 5px;
+        }
+
+        .event {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .location {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Scroll down indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            color: #fff;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-15px) translateX(-50%); }
+            60% { transform: translateY(-7px) translateX(-50%); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="envelope-overlay">
+        <div class="seal-container" onclick="openEnvelope()">
+            <div class="wax-seal">E&J</div>
+            <div class="invite-text">You are invited</div>
+        </div>
+    </div>
+
+    <div id="main-content">
+        
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="pre-title">We are getting married</div>
+                <h1 class="names">Emma & James</h1>
+                <div class="date">NOVEMBER 22, 2026</div>
+            </div>
+            <div class="scroll-indicator">Scroll down for details ↓</div>
+        </section>
+
+        <section class="details-section">
+            <h2 class="section-title">Programme du jour</h2>
+            
+            <div class="schedule-item">
+                <div class="time">3:00 PM</div>
+                <div class="event">Welcome Drinks</div>
+                <div class="location">The Botanical Gardens</div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">4:00 PM</div>
+                <div class="event">The Ceremony</div>
+                <div class="location">The Glass Greenhouse</div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">6:00 PM</div>
+                <div class="event">Dinner & Dancing</div>
+                <div class="location">The Grand Estate Hall</div>
+            </div>
+            
+            <div class="schedule-item" style="margin-top: 60px;">
+                <h2 class="section-title">RSVP</h2>
+                <p>Please kindly confirm your presence by October 1st, 2026.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function openEnvelope() {
+            // Slide the envelope up and fade it out
+            document.getElementById('envelope-overlay').classList.add('open-envelope');
+            
+            // Allow the body to scroll again
+            document.body.style.overflow = 'auto';
+            
+            // Fade in the main content
+            document.getElementById('main-content').classList.add('content-visible');
+        }
+    </script>
+
+</body>
+</html>
