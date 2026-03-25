@@ -11,139 +11,141 @@
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: 'Montserrat', sans-serif;
-            overflow: hidden; /* Prevent scrolling until opened */
-            background-color: #fcfaf8;
+            overflow: hidden; /* Prevents scrolling until opened */
+            background-color: #0a0a0a; /* Dark background to make envelope pop */
         }
 
-        /* --- PREMIUM 3D ENVELOPE OVERLAY --- */
-        #envelope-overlay {
+        /* --- 1. THE LUXURY ENVELOPE SCREEN --- */
+        #envelope-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #1a1a1a;
+            display: flex; justify-content: center; align-items: center;
             z-index: 9999;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1) 0.8s, opacity 1s ease 0.8s;
             perspective: 1500px;
-            transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.5s ease;
-            /* Deep, embossed floral texture background */
-            background-color: #8c9b83;
-            background-image: 
-                linear-gradient(rgba(140, 155, 131, 0.8), rgba(140, 155, 131, 0.8)),
-                url('https://www.transparenttextures.com/patterns/floral-vellum.png');
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
 
-        /* The Top V-Flap of the envelope */
-        .envelope-flap {
+        /* The main body of the envelope (Sage Green) */
+        .envelope-body {
+            position: relative;
+            width: 100vw; height: 100vh;
+            background-color: #8f9b87; /* Exact sage green from your screenshot */
+            display: flex; justify-content: center; align-items: center;
+            flex-direction: column;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        /* The 3D Folding Top Flap */
+        .flap-container {
             position: absolute; top: 0; left: 0; width: 100%; height: 50vh;
-            background-color: #83917a;
-            background-image: 
-                linear-gradient(rgba(131, 145, 122, 0.8), rgba(131, 145, 122, 0.8)),
-                url('https://www.transparenttextures.com/patterns/floral-vellum.png');
-            clip-path: polygon(0 0, 100% 0, 50% 100%);
-            z-index: 5;
+            perspective: 1000px; z-index: 10;
+        }
+
+        .flap {
+            width: 100%; height: 100%;
             transform-origin: top;
+            transform-style: preserve-3d;
             transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 15px 15px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3)); /* Shadow over the envelope body */
         }
 
-        /* Inner lining visible when flap opens */
-        .envelope-flap::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: #e8e4d9; /* Cream inner envelope */
-            z-index: -1;
-            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        /* Front of flap (Sage) and Back of flap (Cream) */
+        .flap-front, .flap-back {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden;
+            clip-path: polygon(0 0, 100% 0, 50% 100%); /* Perfect triangle */
+        }
+        
+        .flap-front { 
+            background-color: #899680; 
+        }
+        
+        .flap-back { 
+            background-color: #e6e2d6; /* Cream interior */
+            transform: rotateX(180deg); 
         }
 
-        /* --- PREMIUM WAX SEAL --- */
-        .wax-seal-container {
+        /* --- 2. THE BREAKING WAX SEAL --- */
+        .seal-container {
             position: absolute; top: 50vh; left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 10;
+            z-index: 20;
+            width: 120px; height: 120px;
             cursor: pointer;
-            width: 150px; height: 150px;
         }
 
-        /* The seal itself, styled to look thick and metallic/waxy */
-        .wax-seal {
-            width: 100%; height: 100%;
-            background: radial-gradient(circle at 30% 30%, #e63946, #ba1826, #780000);
+        /* Splitting the seal into left and right halves */
+        .seal-half {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 35% 35%, #e04a4a, #b32424, #730000); /* Glossy Red */
             border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            color: #ffddd2;
-            font-family: 'Cinzel', serif;
-            font-size: 3rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-            box-shadow: 
-                0 15px 25px rgba(0,0,0,0.4), /* Drop shadow on envelope */
-                inset 0 5px 10px rgba(255,255,255,0.4), /* Top highlight */
-                inset 0 -8px 15px rgba(0,0,0,0.6); /* Bottom curve shadow */
-            border: 2px solid #5c0000;
-            position: relative;
-            transition: transform 0.3s ease, opacity 0.4s ease;
+            color: #fff; font-family: 'Montserrat', sans-serif; font-size: 2rem;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.4), inset 0 4px 6px rgba(255,255,255,0.4), inset 0 -4px 8px rgba(0,0,0,0.6);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
         }
 
-        /* The stamped inner rim */
-        .wax-seal::after {
-            content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
-            border: 2px solid rgba(255, 205, 210, 0.3); border-radius: 50%;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
-        }
+        .seal-left { clip-path: inset(0 50% 0 0); }
+        .seal-right { clip-path: inset(0 0 0 50%); }
 
-        /* The script text below the seal */
+        /* Broken Seal Animation Classes */
+        .broken .seal-left { transform: translateX(-40px) rotate(-15deg); opacity: 0; pointer-events: none; }
+        .broken .seal-right { transform: translateX(40px) rotate(15deg); opacity: 0; pointer-events: none; }
+
         .invite-text {
-            position: absolute; top: calc(50vh + 90px); left: 50%;
+            position: absolute; top: calc(50vh + 80px); left: 50%;
             transform: translateX(-50%);
-            color: #fff; font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem; text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-            z-index: 4; transition: opacity 0.5s ease;
-            white-space: nowrap;
+            color: #fff; font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem; letter-spacing: 1px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+            z-index: 20; transition: opacity 0.5s ease;
         }
 
-        /* Animations for opening */
-        .seal-broken { opacity: 0; transform: scale(1.2); pointer-events: none; }
-        .flap-open { transform: rotateX(180deg); }
-        .envelope-away { transform: translateY(-100vh); opacity: 0; pointer-events: none; }
 
-
-        /* --- MAIN CONTENT (ANIMATED BACKGROUND) --- */
+        /* --- 3. MAIN INVITATION CONTENT (WITH VIDEO BACKGROUND) --- */
         #main-content {
-            height: 100vh; overflow-y: scroll; opacity: 0;
-            transition: opacity 1.5s ease 0.5s;
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100vh;
+            overflow-y: scroll; opacity: 0;
+            transition: opacity 1.5s ease 1s; /* Fades in after envelope drops */
         }
+
         .content-visible { opacity: 1 !important; }
 
-        /* The Cinematic Hero Section */
+        /* The Cinematic Video Hero Section */
         .hero-section {
             height: 100vh; width: 100%; position: relative;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; color: #fff; overflow: hidden;
         }
 
-        /* The Background Video Layer */
-        .hero-video {
+        /* Bulletproof Video Background setup */
+        .bg-video {
             position: absolute; top: 50%; left: 50%;
             min-width: 100%; min-height: 100%;
             transform: translate(-50%, -50%);
             z-index: -2; object-fit: cover;
         }
 
-        /* Gradient overlay to make text pop against the moving video */
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
             z-index: -1;
         }
 
         .hero-content { z-index: 2; display: flex; flex-direction: column; align-items: center; }
         .pre-title { font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; font-weight: 300; }
-        .names { font-family: 'Great Vibes', cursive; font-size: 6.5rem; margin: 0; font-weight: 400; text-shadow: 2px 2px 10px rgba(0,0,0,0.4); }
+        .names { font-family: 'Great Vibes', cursive; font-size: 6.5rem; margin: 0; font-weight: 400; text-shadow: 2px 2px 15px rgba(0,0,0,0.5); }
         .date-hero { font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 3px; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.6); }
 
-        /* Details Section */
+        /* Paper Details Section */
         .details-section { padding: 80px 20px; background-color: #fcfaf8; text-align: center; color: #5a4b41; }
         .proposal-area { max-width: 600px; margin: 0 auto 50px auto; }
         .proposal-year { font-family: 'Cinzel', serif; font-size: 1.5rem; color: #a43a3a; margin-bottom: 5px; }
-        .proposal-title { font-family: 'Great Vibes', cursive; font-size: 3rem; color: #8c7a6b; margin-bottom: 20px; font-weight: 400; }
-        .proposal-text { font-family: 'Great Vibes', cursive; font-size: 1.8rem; line-height: 1.4; color: #5a4b41; margin-bottom: 30px; opacity: 0.9; }
+        .proposal-title { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #8c7a6b; margin-bottom: 20px; font-weight: 400; }
+        .proposal-text { font-family: 'Great Vibes', cursive; font-size: 2rem; line-height: 1.4; color: #5a4b41; margin-bottom: 30px; opacity: 0.9; }
         
-        .vintage-dove-illustration { width: 300px; max-width: 85%; margin: 0 auto 50px auto; display: block; opacity: 0.95; border-radius: 10px; }
+        .vintage-dove-illustration { width: 300px; max-width: 85%; margin: 0 auto 50px auto; display: block; opacity: 0.95; }
 
         .order-title { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #8c7a6b; margin-bottom: 40px; font-weight: 400; }
         .schedule-item { margin-bottom: 35px; }
@@ -151,6 +153,11 @@
         .event { font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 5px; color: #333; }
         .location { font-size: 0.95rem; font-style: italic; color: #777; }
 
+        /* Animations triggered by Javascript */
+        .open-flap { transform: rotateX(180deg); }
+        .envelope-slide-down { transform: translateY(100vh); opacity: 0; pointer-events: none; }
+
+        /* Scroll indicator */
         .scroll-indicator {
             position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 2;
             color: #fff; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
@@ -166,22 +173,30 @@
 </head>
 <body>
 
-    <div id="envelope-overlay">
-        
-        <div class="envelope-flap" id="envelope-flap"></div>
-        
-        <div class="wax-seal-container" onclick="openEnvelope()">
-            <div class="wax-seal" id="wax-seal">A&D</div>
+    <div id="envelope-screen">
+        <div class="envelope-body">
+            
+            <div class="flap-container">
+                <div class="flap" id="envelope-flap">
+                    <div class="flap-front"></div>
+                    <div class="flap-back"></div>
+                </div>
+            </div>
+
+            <div class="seal-container" id="wax-seal" onclick="openEnvelope()">
+                <div class="seal-half seal-left">A&D</div>
+                <div class="seal-half seal-right">A&D</div>
+            </div>
+
+            <div class="invite-text" id="invite-text">You are invited</div>
         </div>
-        
-        <div class="invite-text" id="invite-text">You are invited</div>
     </div>
 
     <div id="main-content">
         
         <section class="hero-section">
-            <video class="hero-video" autoplay loop muted playsinline>
-                <source src="https://cdn.pixabay.com/video/2021/08/11/84687-586948523_large.mp4" type="video/mp4">
+            <video class="bg-video" autoplay loop muted playsinline>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-birds-flying-over-a-calm-beach-405-large.mp4" type="video/mp4">
             </video>
             <div class="hero-overlay"></div>
 
@@ -227,21 +242,21 @@
 
     <script>
         function openEnvelope() {
-            // 1. "Break" (fade/scale) the seal and text
-            document.getElementById('wax-seal').classList.add('seal-broken');
-            document.getElementById('invite-text').classList.add('seal-broken');
+            // Step 1: Break the seal and fade the text
+            document.getElementById('wax-seal').classList.add('broken');
+            document.getElementById('invite-text').style.opacity = '0';
             
-            // 2. Flip open the envelope flap
+            // Step 2: Open the flap to reveal the cream interior
             setTimeout(() => {
-                document.getElementById('envelope-flap').classList.add('flap-open');
+                document.getElementById('envelope-flap').classList.add('open-flap');
             }, 300);
 
-            // 3. Slide the whole envelope up and reveal the moving video background
+            // Step 3: Slide the entire envelope down and reveal the video background
             setTimeout(() => {
-                document.getElementById('envelope-overlay').classList.add('envelope-away');
-                document.body.style.overflow = 'auto'; // allow scroll
+                document.getElementById('envelope-screen').classList.add('envelope-slide-down');
+                document.body.style.overflow = 'auto'; // Enable scrolling
                 document.getElementById('main-content').classList.add('content-visible');
-            }, 1000);
+            }, 800);
         }
     </script>
 
