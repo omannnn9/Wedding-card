@@ -133,32 +133,37 @@
 
         .content-visible { opacity: 1 !important; }
 
-        /* Hero Section with Robust Video + Poster Fallback */
+        /* Hero Section with Robust Video + Absolute CSS Image Fallback */
         .hero-section {
             height: 100vh; width: 100%; position: relative;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; color: #fff; overflow: hidden;
+            /* IRONCLAD FALLBACK: Dark green base + beautiful image */
+            background-color: #2c3328;
+            background-image: url('https://images.unsplash.com/photo-1541789094913-f3809a8f3ba5?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover; background-position: center;
         }
 
-        /* Video Layer: Uses a stunning poster image just in case video fails on low power mode */
+        /* Video Layer: Uses Mixkit Permanent CDN */
         .bg-video {
             position: absolute; top: 50%; left: 50%;
             min-width: 100%; min-height: 100%;
             transform: translate(-50%, -50%);
-            z-index: -2; object-fit: cover;
+            z-index: 1; object-fit: cover;
         }
 
+        /* Dark overlay to ensure white text pops */
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
-            z-index: -1;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+            z-index: 2;
         }
 
-        .hero-content { z-index: 2; display: flex; flex-direction: column; align-items: center; }
+        .hero-content { z-index: 3; display: flex; flex-direction: column; align-items: center; }
         
-        .pre-title { font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px; font-weight: 400; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
-        .names { font-family: 'Great Vibes', cursive; font-size: 7rem; margin: 0; font-weight: 400; text-shadow: 2px 4px 15px rgba(0,0,0,0.4); line-height: 1.1; }
-        .date-hero { font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 4px; margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.5); }
+        .pre-title { font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px; font-weight: 400; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
+        .names { font-family: 'Great Vibes', cursive; font-size: 7rem; margin: 0; font-weight: 400; text-shadow: 2px 4px 15px rgba(0,0,0,0.8); line-height: 1.1; }
+        .date-hero { font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 4px; margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.5); text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
 
         /* --- 4. LUXURY INDIAN WEDDING STATIONERY LAYOUT --- */
         .details-section { padding: 100px 20px 120px 20px; text-align: center; color: #4a4036; background-image: radial-gradient(rgba(0,0,0,0.02) 1px, transparent 1px); background-size: 4px 4px; }
@@ -166,7 +171,7 @@
         .section-title { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: #829379; margin-bottom: 30px; font-weight: 400; }
         .intro-text { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; line-height: 1.8; max-width: 600px; margin: 0 auto 50px auto; color: #665b50; font-weight: 300; }
         
-        /* The Bulletproof CSS Luxury Divider (Replaces broken image) */
+        /* The Bulletproof CSS Luxury Divider */
         .luxury-divider {
             display: flex; justify-content: center; align-items: center; gap: 15px;
             margin: 60px 0; opacity: 0.7;
@@ -195,9 +200,9 @@
         #envelope-screen.slide-away { transform: translateY(-100vh); opacity: 0; pointer-events: none; }
 
         .scroll-indicator {
-            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 2;
+            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 4;
             color: #fff; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase;
-            animation: bounce 2s infinite; opacity: 0.9;
+            animation: bounce 2s infinite; opacity: 0.9; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
 
         @keyframes bounce {
@@ -230,9 +235,11 @@
 
     <div id="main-content">
         <section class="hero-section">
-            <video class="bg-video" autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1541789094913-f3809a8f3ba5?q=80&w=1600&auto=format&fit=crop">
-                <source src="https://player.vimeo.com/external/396557404.sd.mp4?s=d01067dbfffe48a609d846c2d13b6329ed483758&profile_id=164&oauth2_token_id=57447761" type="video/mp4">
+            
+            <video class="bg-video" autoplay loop muted playsinline>
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-birds-flying-over-a-calm-beach-405-large.mp4" type="video/mp4">
             </video>
+            
             <div class="hero-overlay"></div>
 
             <div class="hero-content">
