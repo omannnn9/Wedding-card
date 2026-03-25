@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation | Emma & James</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <title>Wedding Invitation | Alex & Diane</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
         /* General Setup */
@@ -14,19 +14,19 @@
             width: 100%;
             height: 100%;
             font-family: 'Montserrat', sans-serif;
-            overflow: hidden; /* Prevent scrolling until opened */
-            background-color: #fbf9f6;
+            overflow: hidden; /* Prevent scrolling until envelope opens */
+            background-color: #fcfaf8; /* Warm paper color */
         }
 
-        /* --- OVERLAY: The Envelope Screen --- */
+        /* --- OVERLAY: The Green Floral Envelope --- */
         #envelope-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* Green floral placeholder background */
-            background-image: url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1000&auto=format&fit=crop');
+            /* Green floral aesthetic background */
+            background-image: url('https://images.unsplash.com/photo-1533038590840-1cbea6c6cc19?q=80&w=1000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             z-index: 9999;
@@ -37,64 +37,76 @@
             transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.5s ease;
         }
 
-        /* Dark overlay to make the envelope texture look richer */
+        /* Green tint to make it look more like your specific envelope */
         #envelope-overlay::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(135, 148, 126, 0.85); /* Sage green tint */
+            background: rgba(122, 140, 115, 0.7); /* Sage green overlay */
             z-index: -1;
         }
 
         .seal-container {
             text-align: center;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
 
         .seal-container:hover {
             transform: scale(1.05);
         }
 
+        /* The Red Wax Seal */
         .wax-seal {
-            width: 120px;
-            height: 120px;
-            background-color: #9b2226; /* Deep red wax color */
+            width: 130px;
+            height: 130px;
+            background: radial-gradient(circle at 40px 40px, #d62828, #9b1b1b);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             color: #fff;
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-style: italic;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3), inset 0 -3px 8px rgba(0,0,0,0.2);
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            box-shadow: 
+                0 10px 20px rgba(0,0,0,0.4), 
+                inset 0 -5px 15px rgba(0,0,0,0.4),
+                inset 0 5px 10px rgba(255,255,255,0.2);
             margin: 0 auto 20px auto;
-            border: 2px solid #7a181c;
+            border: 2px solid #7a1212;
+            position: relative;
+        }
+
+        /* Making the edges of the seal look organic/melted */
+        .wax-seal::after {
+            content: '';
+            position: absolute;
+            top: 2px; left: 2px; right: 2px; bottom: 2px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .invite-text {
             color: #fff;
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-style: italic;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+            margin-top: 15px;
         }
 
         /* Animation class to hide the envelope */
         .open-envelope {
-            transform: translateY(-100%);
+            transform: translateY(-100vh);
             opacity: 0;
             pointer-events: none;
         }
-
 
         /* --- MAIN CONTENT: The Invitation --- */
         #main-content {
             height: 100vh;
             overflow-y: scroll;
             opacity: 0;
-            transition: opacity 1s ease 0.5s; /* Fades in after envelope opens */
+            transition: opacity 1.5s ease 0.5s; /* Fades in smoothly */
         }
 
         .content-visible {
@@ -105,8 +117,8 @@
         .hero-section {
             height: 100vh;
             width: 100%;
-            /* Paradise garden placeholder background */
-            background-image: url('https://images.unsplash.com/photo-1588392382834-a891154bca4d?q=80&w=1000&auto=format&fit=crop');
+            /* Warm paradise / Riad garden placeholder */
+            background-image: url('https://images.unsplash.com/photo-1541789094913-f3809a8f3ba5?q=80&w=1000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -118,97 +130,140 @@
             position: relative;
         }
 
-        /* Subtle gradient to make text readable */
+        /* Gradient overlay so the white text pops against the background */
         .hero-section::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.4));
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
             z-index: 1;
         }
 
         .hero-content {
             z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .pre-title {
-            font-size: 1rem;
-            letter-spacing: 3px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
             text-transform: uppercase;
             margin-bottom: 10px;
+            font-weight: 300;
         }
 
         .names {
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            margin: 10px 0;
-            font-style: italic;
+            font-family: 'Great Vibes', cursive;
+            font-size: 5.5rem;
+            margin: 5px 0;
+            font-weight: 400;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
         }
 
         .date {
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            margin-top: 20px;
-            border-top: 1px solid #fff;
-            padding-top: 10px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.6);
             display: inline-block;
         }
 
-        /* Section 2: Details & Program */
+        /* Section 2: Details & Program on Paper Background */
         .details-section {
             padding: 80px 20px;
-            background-color: #fbf9f6; /* Soft cream background */
+            background-color: #fcfaf8; /* Warm paper matching the video */
             text-align: center;
-            color: #4a4a4a;
+            color: #5a4b41;
+        }
+
+        /* Placeholder for your beautiful Dove/Floral illustration */
+        .vintage-illustration {
+            width: 250px;
+            max-width: 80%;
+            margin: 0 auto 30px auto;
+            display: block;
+            opacity: 0.9;
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-style: italic;
-            color: #87947e; /* Sage green to match envelope */
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: #8c7a6b;
             margin-bottom: 40px;
+            font-weight: 400;
         }
 
         .schedule-item {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .time {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #9b2226;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #a43a3a; /* Deep red matching wax seal */
             margin-bottom: 5px;
+            letter-spacing: 1px;
         }
 
         .event {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
             margin-bottom: 5px;
+            color: #333;
         }
 
         .location {
+            font-family: 'Montserrat', sans-serif;
             font-size: 0.9rem;
+            font-style: italic;
             color: #777;
+        }
+
+        .rsvp-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 15px 40px;
+            border: 1px solid #a43a3a;
+            color: #a43a3a;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .rsvp-button:hover {
+            background-color: #a43a3a;
+            color: #fff;
         }
 
         /* Scroll down indicator */
         .scroll-indicator {
             position: absolute;
-            bottom: 30px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 2;
             color: #fff;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             animation: bounce 2s infinite;
+            opacity: 0.8;
         }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-            40% { transform: translateY(-15px) translateX(-50%); }
-            60% { transform: translateY(-7px) translateX(-50%); }
+            40% { transform: translateY(-10px) translateX(-50%); }
+            60% { transform: translateY(-5px) translateX(-50%); }
         }
     </style>
 </head>
@@ -216,7 +271,7 @@
 
     <div id="envelope-overlay">
         <div class="seal-container" onclick="openEnvelope()">
-            <div class="wax-seal">E&J</div>
+            <div class="wax-seal">A&D</div>
             <div class="invite-text">You are invited</div>
         </div>
     </div>
@@ -225,51 +280,47 @@
         
         <section class="hero-section">
             <div class="hero-content">
-                <div class="pre-title">We are getting married</div>
-                <h1 class="names">Emma & James</h1>
-                <div class="date">NOVEMBER 22, 2026</div>
+                <div class="pre-title">Nous nous marions</div>
+                <h1 class="names">Alex & Diane</h1>
+                <div class="date">22 NOVEMBRE 2026</div>
             </div>
-            <div class="scroll-indicator">Scroll down for details ↓</div>
+            <div class="scroll-indicator">Confirmer sa présence ↓</div>
         </section>
 
         <section class="details-section">
+            
+            <img class="vintage-illustration" src="https://images.unsplash.com/photo-1572455044327-7348c1be7267?q=80&w=600&auto=format&fit=crop" alt="Floral Illustration" style="border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+
             <h2 class="section-title">Programme du jour</h2>
             
             <div class="schedule-item">
-                <div class="time">3:00 PM</div>
-                <div class="event">Welcome Drinks</div>
-                <div class="location">The Botanical Gardens</div>
+                <div class="time">15:00</div>
+                <div class="event">Accueil des Invités</div>
+                <div class="location">Les Jardins du Palais</div>
             </div>
 
             <div class="schedule-item">
-                <div class="time">4:00 PM</div>
-                <div class="event">The Ceremony</div>
-                <div class="location">The Glass Greenhouse</div>
+                <div class="time">16:00</div>
+                <div class="event">La Cérémonie</div>
+                <div class="location">Sous les Palmiers</div>
             </div>
 
             <div class="schedule-item">
-                <div class="time">6:00 PM</div>
-                <div class="event">Dinner & Dancing</div>
-                <div class="location">The Grand Estate Hall</div>
+                <div class="time">18:30</div>
+                <div class="event">Dîner & Soirée</div>
+                <div class="location">Le Grand Riad</div>
             </div>
             
-            <div class="schedule-item" style="margin-top: 60px;">
-                <h2 class="section-title">RSVP</h2>
-                <p>Please kindly confirm your presence by October 1st, 2026.</p>
-            </div>
+            <a href="#" class="rsvp-button">RSVP Ici</a>
+            
         </section>
 
     </div>
 
     <script>
         function openEnvelope() {
-            // Slide the envelope up and fade it out
             document.getElementById('envelope-overlay').classList.add('open-envelope');
-            
-            // Allow the body to scroll again
             document.body.style.overflow = 'auto';
-            
-            // Fade in the main content
             document.getElementById('main-content').classList.add('content-visible');
         }
     </script>
