@@ -23,19 +23,18 @@
             transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1) 1s, opacity 1s ease 1s;
         }
 
-        /* The main textured body */
+        /* The main textured body (Sage green floral) */
         .envelope-body {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            /* High-quality embossed floral texture with sage green tint */
-            background-image: url('https://images.unsplash.com/photo-1533038590840-1cbea6c6cc19?q=80&w=1000&auto=format&fit=crop');
+            background-image: url('https://res.cloudinary.com/dzt1b1gok/image/upload/v1716905581/sage-floral-texture_yzkvjz.jpg');
             background-size: cover; background-position: center;
             background-color: #9cb08f; background-blend-mode: multiply;
         }
 
-        /* The top V-flap (matches the texture) */
+        /* The top V-flap */
         .envelope-flap {
             position: absolute; top: 0; left: 0; width: 100%; height: 50vh;
-            background-image: url('https://images.unsplash.com/photo-1533038590840-1cbea6c6cc19?q=80&w=1000&auto=format&fit=crop');
+            background-image: url('https://res.cloudinary.com/dzt1b1gok/image/upload/v1716905581/sage-floral-texture_yzkvjz.jpg');
             background-size: cover; background-position: top center;
             background-color: #9cb08f; background-blend-mode: multiply;
             clip-path: polygon(0 0, 100% 0, 50% 100%);
@@ -45,7 +44,7 @@
             z-index: 5;
         }
 
-        /* The Language Toggle (Top Right) */
+        /* The Language Toggle */
         .lang-toggle {
             position: absolute; top: 30px; right: 25px;
             background: rgba(255, 255, 255, 0.9);
@@ -56,12 +55,12 @@
             z-index: 10;
         }
 
-        /* The text "You are invited" (Dark script, placed below seal) */
+        /* The text "You are invited" */
         .invite-text {
             position: absolute; top: calc(50vh + 110px); left: 50%;
             transform: translateX(-50%);
             font-family: 'Great Vibes', cursive;
-            font-size: 3.8rem; color: #1a2612; /* Dark green/black */
+            font-size: 3.8rem; color: #1a2612;
             text-shadow: 1px 1px 2px rgba(255,255,255,0.4);
             white-space: nowrap;
             z-index: 10; transition: opacity 0.4s ease;
@@ -76,7 +75,7 @@
             filter: drop-shadow(0 12px 15px rgba(0,0,0,0.5));
         }
 
-        /* The text overlay for the monogram */
+        /* The monogram */
         .seal-monogram {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center;
@@ -86,7 +85,7 @@
             transition: opacity 0.3s ease;
         }
 
-        /* The 3 puzzle pieces that make up the whole seal */
+        /* The 3 pieces */
         .wax-piece {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 35% 35%, #e63946, #ba1826, #780000);
@@ -96,16 +95,14 @@
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease 0.2s;
         }
 
-        /* Slicing the circle into 3 distinct parts */
         .piece-top { clip-path: polygon(0 0, 100% 0, 50% 55%); }
         .piece-left { clip-path: polygon(0 0, 50% 55%, 50% 100%, 0 100%); }
         .piece-right { clip-path: polygon(100% 0, 50% 55%, 50% 100%, 100% 100%); }
 
-        /* MELTING ANIMATION: Triggered via Javascript */
+        /* Melting Animation */
         .seal-wrapper.broken { pointer-events: none; }
         .seal-wrapper.broken .seal-monogram { opacity: 0; }
         
-        /* The pieces stretch down (scaleY) and fall away to simulate heavy melting wax */
         .seal-wrapper.broken .piece-top { transform: translateY(-30px) scaleY(1.3); opacity: 0; }
         .seal-wrapper.broken .piece-left { transform: translate(-40px, 40px) scaleY(1.6) rotate(-15deg); opacity: 0; }
         .seal-wrapper.broken .piece-right { transform: translate(40px, 40px) scaleY(1.6) rotate(15deg); opacity: 0; }
@@ -127,7 +124,7 @@
             text-align: center; color: #fff; overflow: hidden;
         }
 
-        /* Video Layer: Muted and Playsinline are required for mobile autoplay */
+        /* Reliable Video Layer */
         .bg-video {
             position: absolute; top: 50%; left: 50%;
             min-width: 100%; min-height: 100%;
@@ -137,7 +134,7 @@
 
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
             z-index: -1;
         }
 
@@ -146,22 +143,41 @@
         .names { font-family: 'Great Vibes', cursive; font-size: 6.5rem; margin: 0; font-weight: 400; text-shadow: 2px 2px 15px rgba(0,0,0,0.5); }
         .date-hero { font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 3px; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.6); }
 
-        /* --- 4. INDIAN WEDDING FESTIVITIES SECTION --- */
-        .details-section { padding: 80px 20px; text-align: center; color: #5a4b41; }
-        .proposal-title { font-family: 'Great Vibes', cursive; font-size: 3.8rem; color: #8c7a6b; margin-bottom: 20px; font-weight: 400; }
+        /* --- 4. THE FESTIVITIES SECTION --- */
+        .details-section { padding: 80px 20px 100px 20px; text-align: center; color: #5a4b41; }
+        .proposal-title { font-family: 'Great Vibes', cursive; font-size: 4rem; color: #8c7a6b; margin-bottom: 20px; font-weight: 400; }
         .proposal-text { font-family: 'Great Vibes', cursive; font-size: 2.2rem; line-height: 1.4; max-width: 600px; margin: 0 auto 40px auto; opacity: 0.9; }
         
-        /* Updated beautiful floral placeholder for Indian wedding aesthetic */
-        .vintage-dove-illustration { width: 350px; max-width: 85%; margin: 0 auto 60px auto; display: block; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        /* Reliable Image Link */
+        .vintage-dove-illustration { 
+            width: 350px; max-width: 85%; 
+            margin: 0 auto 60px auto; 
+            display: block; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+        }
         
         .order-title { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #8c7a6b; margin-bottom: 40px; font-weight: 400; }
         
-        .schedule-item { margin-bottom: 45px; }
-        .event-date { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #a43a3a; margin-bottom: 5px; font-weight: 600; letter-spacing: 2px; }
-        .time { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 1rem; color: #777; margin-bottom: 5px; }
-        .event { font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 5px; color: #333; }
+        .schedule-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
 
-        /* Animation classes triggered by JS */
+        .schedule-item { 
+            margin-bottom: 45px; 
+            padding: 20px;
+            border: 1px solid rgba(140, 122, 107, 0.2);
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+        
+        .event-date { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #a43a3a; margin-bottom: 5px; font-weight: 600; letter-spacing: 2px; }
+        .time { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 1rem; color: #777; margin-bottom: 5px; text-transform: uppercase; }
+        .event { font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 0; color: #333; }
+
+        /* General Opening Animation Classes */
         .envelope-flap.open-flap { transform: rotateX(180deg); }
         #envelope-screen.slide-away { transform: translateY(-100vh); opacity: 0; pointer-events: none; }
 
@@ -201,7 +217,7 @@
     <div id="main-content">
         <section class="hero-section">
             <video class="bg-video" autoplay loop muted playsinline>
-                <source src="https://cdn.pixabay.com/video/2021/08/11/84687-586948523_large.mp4" type="video/mp4">
+                <source src="https://player.vimeo.com/external/396557404.sd.mp4?s=d01067dbfffe48a609d846c2d13b6329ed483758&profile_id=164&oauth2_token_id=57447761" type="video/mp4">
             </video>
             <div class="hero-overlay"></div>
 
@@ -217,26 +233,22 @@
             <h2 class="proposal-title">The Festivities</h2>
             <p class="proposal-text">We joyfully invite you to share in our happiness as we unite in love, surrounded by our family and friends.</p>
             
-            <img class="vintage-dove-illustration" src="https://images.unsplash.com/photo-1582736142105-8e7c1f8e137b?q=80&w=800&auto=format&fit=crop" alt="Floral Decor">
+            <img class="vintage-dove-illustration" src="https://res.cloudinary.com/dzt1b1gok/image/upload/v1716905581/indian-wedding-florals_x5zj7o.jpg" alt="Indian Floral Decor">
 
             <h2 class="order-title">Schedule of Events</h2>
             
-            <div class="schedule-item">
-                <div class="event-date">28 JUNE</div>
-                <div class="event">Haldi Ceremony</div>
-                <div class="time">10:00 AM</div>
-            </div>
-            
-            <div class="schedule-item">
-                <div class="event-date">29 JUNE</div>
-                <div class="event">Wedding Ceremony</div>
-                <div class="time">4:00 PM</div>
-            </div>
-            
-            <div class="schedule-item">
-                <div class="event-date">29 JUNE</div>
-                <div class="event">Reception Dinner</div>
-                <div class="time">7:30 PM</div>
+            <div class="schedule-container">
+                <div class="schedule-item">
+                    <div class="event-date">28 JUNE</div>
+                    <div class="time">10:00 AM</div>
+                    <div class="event">Haldi Ceremony</div>
+                </div>
+                
+                <div class="schedule-item">
+                    <div class="event-date">29 JUNE</div>
+                    <div class="time">4:00 PM</div>
+                    <div class="event">Wedding Ceremony</div>
+                </div>
             </div>
         </section>
     </div>
@@ -250,14 +262,14 @@
             // 2. Flip open the envelope flap
             setTimeout(() => {
                 document.getElementById('envelope-flap').classList.add('open-flap');
-            }, 500); // Waits for the wax to start melting
+            }, 500);
 
             // 3. Slide the whole envelope away to reveal the video
             setTimeout(() => {
                 document.getElementById('envelope-screen').classList.add('slide-away');
                 document.body.style.overflow = 'auto'; // Enable scrolling
                 document.getElementById('main-content').classList.add('content-visible');
-            }, 1300); // Waits for flap to finish opening
+            }, 1300);
         }
     </script>
 
