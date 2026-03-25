@@ -4,127 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Invitation | Shikha & Jay</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
-        /* General Reset */
+        /* General Reset & High-End Base */
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: 'Montserrat', sans-serif;
-            overflow: hidden; /* Prevent scrolling until envelope opens */
-            background-color: #000;
+            overflow: hidden; 
+            background-color: #0f1410; /* Very dark rich green/black */
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- 1. THE EMBOSSED FLORAL ENVELOPE --- */
+        /* --- 1. THE LUXURY ENVELOPE --- */
         #envelope-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 9999;
             perspective: 1200px;
-            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1) 1s, opacity 1s ease 1s;
+            transition: transform 1.2s cubic-bezier(0.64, 0, 0.08, 1) 0.8s, opacity 1.2s ease 0.8s;
+            display: flex; justify-content: center; align-items: center;
         }
 
-        /* The main textured body (Sage green floral) */
+        /* Envelope Body with Bulletproof CSS Texture */
         .envelope-body {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://res.cloudinary.com/dzt1b1gok/image/upload/v1716905581/sage-floral-texture_yzkvjz.jpg');
-            background-size: cover; background-position: center;
-            background-color: #9cb08f; background-blend-mode: multiply;
+            background-color: #899a80; /* Elegant Sage Green */
+            /* Pure CSS noise texture - Never fails to load */
+            background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 4px 4px;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.4);
         }
 
-        /* The top V-flap */
+        /* The Top V-Flap */
         .envelope-flap {
             position: absolute; top: 0; left: 0; width: 100%; height: 50vh;
-            background-image: url('https://res.cloudinary.com/dzt1b1gok/image/upload/v1716905581/sage-floral-texture_yzkvjz.jpg');
-            background-size: cover; background-position: top center;
-            background-color: #9cb08f; background-blend-mode: multiply;
+            background-color: #829379;
+            background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 4px 4px;
             clip-path: polygon(0 0, 100% 0, 50% 100%);
             transform-origin: top;
-            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
+            transition: transform 1.2s cubic-bezier(0.64, 0, 0.08, 1);
+            filter: drop-shadow(0 15px 15px rgba(0,0,0,0.3));
             z-index: 5;
         }
 
-        /* The Language Toggle */
+        /* Language Toggle - Refined */
         .lang-toggle {
-            position: absolute; top: 30px; right: 25px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 6px 14px; border-radius: 20px;
-            font-size: 0.8rem; font-weight: 600; color: #555;
-            display: flex; align-items: center; gap: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: absolute; top: 35px; right: 30px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 8px 16px; border-radius: 30px;
+            font-size: 0.75rem; font-weight: 600; color: #333; letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             z-index: 10;
         }
 
-        /* The text "You are invited" */
         .invite-text {
-            position: absolute; top: calc(50vh + 110px); left: 50%;
+            position: absolute; top: calc(50vh + 100px); left: 50%;
             transform: translateX(-50%);
             font-family: 'Great Vibes', cursive;
-            font-size: 3.8rem; color: #1a2612;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.4);
-            white-space: nowrap;
-            z-index: 10; transition: opacity 0.4s ease;
+            font-size: 3.5rem; color: #1a2418;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.2);
+            white-space: nowrap; z-index: 10;
+            transition: opacity 0.4s ease;
         }
 
-        /* --- 2. THE 3-PIECE MELTING WAX SEAL --- */
-        .seal-wrapper {
+        /* --- 2. THE FLAWLESS WAX SEAL ANIMATION --- */
+        .seal-interactive-area {
             position: absolute; top: 50vh; left: 50%;
             transform: translate(-50%, -50%);
-            width: 150px; height: 150px;
+            width: 160px; height: 160px;
             z-index: 20; cursor: pointer;
-            filter: drop-shadow(0 12px 15px rgba(0,0,0,0.5));
-        }
-
-        /* The monogram */
-        .seal-monogram {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; justify-content: center; align-items: center;
-            font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #ffddd2;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-            z-index: 25; pointer-events: none;
-            transition: opacity 0.3s ease;
         }
 
-        /* The 3 pieces */
-        .wax-piece {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 35% 35%, #e63946, #ba1826, #780000);
+        /* THE SOLID SEAL (Visible initially, hides on click) */
+        .seal-solid {
+            position: absolute; width: 130px; height: 130px;
+            background: radial-gradient(circle at 35% 35%, #d62828, #a81c1c, #700b0b);
             border-radius: 50%;
-            box-shadow: inset 0 5px 10px rgba(255,255,255,0.3), inset 0 -6px 12px rgba(0,0,0,0.6);
+            display: flex; justify-content: center; align-items: center;
+            font-family: 'Montserrat', sans-serif; font-size: 2.2rem; font-weight: 500; color: #fdf5e6;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 4px 8px rgba(255,255,255,0.3), inset 0 -6px 12px rgba(0,0,0,0.6);
             border: 2px solid #5c0000;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease 0.2s;
+            transition: opacity 0.1s; /* Instantly disappears on click */
+            z-index: 2;
         }
 
-        .piece-top { clip-path: polygon(0 0, 100% 0, 50% 55%); }
-        .piece-left { clip-path: polygon(0 0, 50% 55%, 50% 100%, 0 100%); }
-        .piece-right { clip-path: polygon(100% 0, 50% 55%, 50% 100%, 100% 100%); }
+        .seal-solid::after {
+            content: ''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px;
+            border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 50%;
+        }
 
-        /* Melting Animation */
-        .seal-wrapper.broken { pointer-events: none; }
-        .seal-wrapper.broken .seal-monogram { opacity: 0; }
+        /* THE BROKEN PIECES (Hidden initially, shoots out on click) */
+        .seal-broken-group {
+            position: absolute; width: 130px; height: 130px;
+            opacity: 0; pointer-events: none; z-index: 1;
+        }
+
+        .wax-shard {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 35% 35%, #d62828, #a81c1c, #700b0b);
+            box-shadow: inset 0 4px 8px rgba(255,255,255,0.3), inset 0 -6px 12px rgba(0,0,0,0.6);
+            border-radius: 50%;
+            transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.6s ease 0.2s;
+        }
+
+        /* Jagged custom cuts for realism */
+        .shard-1 { clip-path: polygon(0 0, 100% 0, 60% 40%, 40% 60%, 0 40%); }
+        .shard-2 { clip-path: polygon(0 40%, 40% 60%, 50% 100%, 0 100%); }
+        .shard-3 { clip-path: polygon(100% 0, 100% 100%, 50% 100%, 40% 60%, 60% 40%); }
+
+        /* Animation State Classes */
+        .seal-interactive-area.is-broken .seal-solid { opacity: 0; }
+        .seal-interactive-area.is-broken .seal-broken-group { opacity: 1; }
         
-        .seal-wrapper.broken .piece-top { transform: translateY(-30px) scaleY(1.3); opacity: 0; }
-        .seal-wrapper.broken .piece-left { transform: translate(-40px, 40px) scaleY(1.6) rotate(-15deg); opacity: 0; }
-        .seal-wrapper.broken .piece-right { transform: translate(40px, 40px) scaleY(1.6) rotate(15deg); opacity: 0; }
+        .seal-interactive-area.is-broken .shard-1 { transform: translateY(-40px) rotate(-15deg); opacity: 0; }
+        .seal-interactive-area.is-broken .shard-2 { transform: translate(-40px, 40px) rotate(-20deg); opacity: 0; }
+        .seal-interactive-area.is-broken .shard-3 { transform: translate(40px, 40px) rotate(20deg); opacity: 0; }
 
 
-        /* --- 3. MAIN CONTENT WITH VIDEO BACKGROUND --- */
+        /* --- 3. MAIN CONTENT (THE WEDDING SITE) --- */
         #main-content {
             position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
             overflow-y: scroll; opacity: 0;
-            transition: opacity 1.5s ease 1.2s;
-            background-color: #fcfaf8;
+            transition: opacity 1.5s ease 1s;
+            background-color: #FAF8F5; /* Warm luxury alabaster */
         }
 
         .content-visible { opacity: 1 !important; }
 
+        /* Hero Section with Robust Video + Poster Fallback */
         .hero-section {
             height: 100vh; width: 100%; position: relative;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; color: #fff; overflow: hidden;
         }
 
-        /* Reliable Video Layer */
+        /* Video Layer: Uses a stunning poster image just in case video fails on low power mode */
         .bg-video {
             position: absolute; top: 50%; left: 50%;
             min-width: 100%; min-height: 100%;
@@ -139,43 +155,40 @@
         }
 
         .hero-content { z-index: 2; display: flex; flex-direction: column; align-items: center; }
-        .pre-title { font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; font-weight: 300; }
-        .names { font-family: 'Great Vibes', cursive; font-size: 6.5rem; margin: 0; font-weight: 400; text-shadow: 2px 2px 15px rgba(0,0,0,0.5); }
-        .date-hero { font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 3px; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.6); }
+        
+        .pre-title { font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px; font-weight: 400; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        .names { font-family: 'Great Vibes', cursive; font-size: 7rem; margin: 0; font-weight: 400; text-shadow: 2px 4px 15px rgba(0,0,0,0.4); line-height: 1.1; }
+        .date-hero { font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 4px; margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.5); }
 
-        /* --- 4. THE FESTIVITIES SECTION --- */
-        .details-section { padding: 80px 20px 100px 20px; text-align: center; color: #5a4b41; }
-        .proposal-title { font-family: 'Great Vibes', cursive; font-size: 4rem; color: #8c7a6b; margin-bottom: 20px; font-weight: 400; }
-        .proposal-text { font-family: 'Great Vibes', cursive; font-size: 2.2rem; line-height: 1.4; max-width: 600px; margin: 0 auto 40px auto; opacity: 0.9; }
+        /* --- 4. LUXURY INDIAN WEDDING STATIONERY LAYOUT --- */
+        .details-section { padding: 100px 20px 120px 20px; text-align: center; color: #4a4036; background-image: radial-gradient(rgba(0,0,0,0.02) 1px, transparent 1px); background-size: 4px 4px; }
         
-        /* Reliable Image Link */
-        .vintage-dove-illustration { 
-            width: 350px; max-width: 85%; 
-            margin: 0 auto 60px auto; 
-            display: block; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+        .section-title { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: #829379; margin-bottom: 30px; font-weight: 400; }
+        .intro-text { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; line-height: 1.8; max-width: 600px; margin: 0 auto 50px auto; color: #665b50; font-weight: 300; }
+        
+        /* The Bulletproof CSS Luxury Divider (Replaces broken image) */
+        .luxury-divider {
+            display: flex; justify-content: center; align-items: center; gap: 15px;
+            margin: 60px 0; opacity: 0.7;
         }
-        
-        .order-title { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #8c7a6b; margin-bottom: 40px; font-weight: 400; }
-        
-        .schedule-container {
-            max-width: 500px;
-            margin: 0 auto;
-        }
+        .divider-line { width: 100px; height: 1px; background-color: #d4af37; } /* Gold lines */
+        .divider-diamond { width: 12px; height: 12px; background-color: #d4af37; transform: rotate(45deg); }
+
+        .schedule-container { max-width: 550px; margin: 0 auto; }
 
         .schedule-item { 
-            margin-bottom: 45px; 
-            padding: 20px;
-            border: 1px solid rgba(140, 122, 107, 0.2);
-            border-radius: 8px;
+            margin-bottom: 40px; 
+            padding: 35px 20px;
             background: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border-top: 3px solid #d4af37; /* Gold accent top */
+            position: relative;
         }
         
-        .event-date { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #a43a3a; margin-bottom: 5px; font-weight: 600; letter-spacing: 2px; }
-        .time { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 1rem; color: #777; margin-bottom: 5px; text-transform: uppercase; }
-        .event { font-family: 'Cinzel', serif; font-size: 1.8rem; margin-bottom: 0; color: #333; }
+        .event-date { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #a43a3a; margin-bottom: 15px; font-weight: 600; letter-spacing: 3px; }
+        .event { font-family: 'Cinzel', serif; font-size: 2rem; margin-bottom: 10px; color: #2c2825; }
+        .time { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 0.95rem; color: #888; letter-spacing: 1px; text-transform: uppercase; }
 
         /* General Opening Animation Classes */
         .envelope-flap.open-flap { transform: rotateX(180deg); }
@@ -183,14 +196,14 @@
 
         .scroll-indicator {
             position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 2;
-            color: #fff; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
-            animation: bounce 2s infinite; opacity: 0.8;
+            color: #fff; font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase;
+            animation: bounce 2s infinite; opacity: 0.9;
         }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
         }
     </style>
 </head>
@@ -198,25 +211,26 @@
 
     <div id="envelope-screen">
         <div class="envelope-body"></div>
-        
-        <div class="lang-toggle">🌐 EN</div>
-        
+        <div class="lang-toggle">EN</div>
         <div class="envelope-flap" id="envelope-flap"></div>
-
         <div class="invite-text" id="invite-text">You are invited</div>
 
-        <div class="seal-wrapper" id="wax-seal" onclick="openEnvelope()">
-            <div class="wax-piece piece-top"></div>
-            <div class="wax-piece piece-left"></div>
-            <div class="wax-piece piece-right"></div>
+        <div class="seal-interactive-area" id="seal-area" onclick="openEnvelope()">
             
-            <div class="seal-monogram">S&J</div>
+            <div class="seal-broken-group">
+                <div class="wax-shard shard-1"></div>
+                <div class="wax-shard shard-2"></div>
+                <div class="wax-shard shard-3"></div>
+            </div>
+            
+            <div class="seal-solid">S&J</div>
+            
         </div>
     </div>
 
     <div id="main-content">
         <section class="hero-section">
-            <video class="bg-video" autoplay loop muted playsinline>
+            <video class="bg-video" autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1541789094913-f3809a8f3ba5?q=80&w=1600&auto=format&fit=crop">
                 <source src="https://player.vimeo.com/external/396557404.sd.mp4?s=d01067dbfffe48a609d846c2d13b6329ed483758&profile_id=164&oauth2_token_id=57447761" type="video/mp4">
             </video>
             <div class="hero-overlay"></div>
@@ -224,52 +238,63 @@
             <div class="hero-content">
                 <div class="pre-title">We Are Getting Married</div>
                 <h1 class="names">Shikha & Jay</h1>
-                <div class="date-hero">29 JUNE</div>
+                <div class="date-hero">29 JUNE 2026</div>
             </div>
             <div class="scroll-indicator">The Festivities ↓</div>
         </section>
 
         <section class="details-section">
-            <h2 class="proposal-title">The Festivities</h2>
-            <p class="proposal-text">We joyfully invite you to share in our happiness as we unite in love, surrounded by our family and friends.</p>
+            <h2 class="section-title">The Festivities</h2>
+            <p class="intro-text">We joyfully invite you to share in our happiness as we unite in love, surrounded by our beloved family and friends.</p>
             
-            <img class="vintage-dove-illustration" src="https://res.cloudinary.com/dzt1b1gok/image/upload/v1716905581/indian-wedding-florals_x5zj7o.jpg" alt="Indian Floral Decor">
+            <div class="luxury-divider">
+                <div class="divider-line"></div>
+                <div class="divider-diamond"></div>
+                <div class="divider-line"></div>
+            </div>
 
-            <h2 class="order-title">Schedule of Events</h2>
+            <h2 class="section-title" style="font-size: 3.5rem;">Schedule of Events</h2>
             
             <div class="schedule-container">
                 <div class="schedule-item">
                     <div class="event-date">28 JUNE</div>
-                    <div class="time">10:00 AM</div>
                     <div class="event">Haldi Ceremony</div>
+                    <div class="time">10:00 AM</div>
                 </div>
                 
                 <div class="schedule-item">
                     <div class="event-date">29 JUNE</div>
-                    <div class="time">4:00 PM</div>
                     <div class="event">Wedding Ceremony</div>
+                    <div class="time">4:00 PM</div>
                 </div>
             </div>
+            
+            <div class="luxury-divider" style="margin-top: 80px;">
+                <div class="divider-line" style="width: 50px;"></div>
+                <div class="divider-diamond" style="width: 8px; height: 8px;"></div>
+                <div class="divider-line" style="width: 50px;"></div>
+            </div>
+            
         </section>
     </div>
 
     <script>
         function openEnvelope() {
-            // 1. Break and melt the seal, hide the cursive text
-            document.getElementById('wax-seal').classList.add('broken');
+            // 1. Trigger the seamless seal break animation
+            document.getElementById('seal-area').classList.add('is-broken');
             document.getElementById('invite-text').style.opacity = '0';
             
-            // 2. Flip open the envelope flap
+            // 2. Open the envelope flap
             setTimeout(() => {
                 document.getElementById('envelope-flap').classList.add('open-flap');
-            }, 500);
+            }, 300);
 
-            // 3. Slide the whole envelope away to reveal the video
+            // 3. Slide the envelope up to reveal the site
             setTimeout(() => {
                 document.getElementById('envelope-screen').classList.add('slide-away');
                 document.body.style.overflow = 'auto'; // Enable scrolling
                 document.getElementById('main-content').classList.add('content-visible');
-            }, 1300);
+            }, 1100);
         }
     </script>
 
